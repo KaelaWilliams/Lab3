@@ -31,16 +31,26 @@ def splitData(data, trainData, testData, ratio):
     """
     # your code here
     data_file = open(data, "r")
-    data_lable = data_file.readline()
+    data_label = data_file.readline()
     data_lines = []
     for line in data_file:
         data_lines.add(line)
-    
-
-
-
-
     data_file.close()
+
+    train_length = len(data_lines) * ratio
+    test_length = len(data_lines) * (1 - ratio)
+
+    train_file = open(trainData, "w")
+    train_file.write(str(data_label) + '\n')
+    for i in range(train_length):
+        train_file.write(str(data_lines.pop()) + '\n')
+    train_file.close()
+
+    test_file = open(testData, 'w')
+    for i in range(test_length):
+        test_file.write(str(data_lines.pop()), + '\n')
+    test_file.close()    
+
 
 def splitDataRandom(data, trainData, testData, ratio):
     """
