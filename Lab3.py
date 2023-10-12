@@ -1,5 +1,5 @@
 """
- Name: Kaela Williams
+ Name: Kaela Williams, Jevan Wilskey
  Assignment: Lab 3 - Process dataset
  Course: CS 330
  Semester: Fall 2023
