@@ -37,18 +37,19 @@ def splitData(data, trainData, testData, ratio):
         data_lines.append(line)
     data_file.close()
 
-    train_length = len(data_lines) * ratio
-    test_length = len(data_lines) * (1 - ratio)
+    train_length = int(len(data_lines) * float(ratio))
+    test_length = int(len(data_lines) * (1 - float(ratio)))
 
     train_file = open(trainData, "w")
-    train_file.write(str(data_label) + '\n')
+    train_file.write(str(data_label))
     for i in range(train_length):
-        train_file.write(str(data_lines.pop()) + '\n')
+        train_file.write(str(data_lines.pop()))
     train_file.close()
 
     test_file = open(testData, 'w')
+    test_file.write(str(data_label))
     for i in range(test_length):
-        test_file.write(str(data_lines.pop()), + '\n')
+        test_file.write(str(data_lines.pop()))
     test_file.close()    
 
 
