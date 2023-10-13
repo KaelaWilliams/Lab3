@@ -74,7 +74,18 @@ def main():
     similar to Lab 2, please add your testing code here
     """
     # your code here
+    data = options.data
+    trainData = options.trainData
+    testData = options.testData
+    ratio = options.ratio
+    if data == '' or trainData == '' or testData == '' or ratio == '':
+        showHelper()
+    if mode == 'N':
+        splitData(data, trainData, testData, ratio)
+    elif mode == 'R':
+        splitDataRandom(data, trainData, testData, ratio)
     pass
+
 
 def showHelper():
     """
@@ -100,6 +111,19 @@ if __name__ == "__main__":
     Similar to Lab 2, please update the argument, and add as you need
     """
     # your code here
+    parser.add_argument('--data', dest='data',
+    default = '',    # default empty!
+    help = 'The original data file')
+    parser.add_argument('--testData', dest='testData',
+    default = '',    # default empty!
+    help = 'The file for testing data used to test the model')
+    parser.add_argument('--trainData', dest='trainData',
+    default = '',    # default empty!
+    help = 'The file for the training data used to build the model')
+    parser.add_argument('--ratio', dest='ratio',
+    default = '',    # default empty!
+    help = 'The ratio of how much of the data should be used for training. A number between 0.0 and 1.0')
+    
     if len(sys.argv)<3:
         showHelper()
     main()
