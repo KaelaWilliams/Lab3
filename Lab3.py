@@ -17,6 +17,7 @@
 import sys
 import argparse
 import math
+import random
 
 def splitData(data, trainData, testData, ratio):
     """
@@ -65,7 +66,40 @@ def splitDataRandom(data, trainData, testData, ratio):
             Almost same as splitData, the only difference is this function will randomly shuffle the input data, so you will randomly select data and store it in the trainData
     """
     # your code here
-    pass
+    data_file = open(data, "r")
+    data_label = data_file.readline()
+    data_lines = []
+    for line in data_file:
+        data_lines.append(line)
+    data_file.close()
+
+    train_length = int(len(data_lines) * float(ratio))
+    test_length = int(len(data_lines) * (1 - float(ratio)))
+    train_current = 0
+    test_current = 0
+
+    train_file = open(trainData, "w")
+    train_file.write(str(data_label))
+    test_file = open(testData, 'w')
+    test_file.write(str(data_label))
+    for i in data_lines:
+        file = random.randint(1,2)
+        if file == 1:
+            if train_current != train_length:
+                train_file.write(str(data_lines.pop()))
+                train_current = train_current+1
+            else:
+                test_file.write(str(data_lines.pop()))
+        else:
+            if test_current != test_length:
+                test_file.write(str(data_lines.pop()))
+                test_current = test_current+1
+            else:
+                train_file.write(str(data_lines.pop()))
+    train_file.close()
+    test_file.close() 
+
+
 
 def main():
     options = parser.parse_args()
@@ -93,7 +127,9 @@ def showHelper():
     Similar to Lab 2, please update the showHelper function to show users how to use your code
     """
     parser.print_help(sys.stderr)
-    # your code here
+    print("Please provide input augument. Here are examples:")
+    print("python "+sys.argv[0]+" --mode R --data Hopsital_Dataset.csv --testData test.csv --trainData train.csv --ratio 0.5")
+    print("python "+sys.argv[0]+" --mode N --data Hopsital_Dataset.csv --testData test.csv --trainData train.csv --ratio 0.2")
 
     sys.exit(0)
 
