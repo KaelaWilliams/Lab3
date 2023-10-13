@@ -73,6 +73,7 @@ def splitDataRandom(data, trainData, testData, ratio):
         data_lines.append(line)
     data_file.close()
 
+    total_length = len(data_lines)
     train_length = int(len(data_lines) * float(ratio))
     test_length = int(len(data_lines) * (1 - float(ratio)))
     train_current = 0
@@ -82,7 +83,7 @@ def splitDataRandom(data, trainData, testData, ratio):
     train_file.write(str(data_label))
     test_file = open(testData, 'w')
     test_file.write(str(data_label))
-    for i in data_lines:
+    for i in range(total_length):
         file = random.randint(1,2)
         if file == 1:
             if train_current != train_length:
