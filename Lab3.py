@@ -30,7 +30,27 @@ def splitData(data, trainData, testData, ratio):
             There is no grading script for this function, because different group may select different dataset depending on their course project, but generally you should make sure that you code can divide the dataset correctly, since you may use it for the course project
     """
     # your code here
-    pass
+    data_file = open(data, "r")
+    data_label = data_file.readline()
+    data_lines = []
+    for line in data_file:
+        data_lines.append(line)
+    data_file.close()
+
+    train_length = len(data_lines) * ratio
+    test_length = len(data_lines) * (1 - ratio)
+
+    train_file = open(trainData, "w")
+    train_file.write(str(data_label) + '\n')
+    for i in range(train_length):
+        train_file.write(str(data_lines.pop()) + '\n')
+    train_file.close()
+
+    test_file = open(testData, 'w')
+    for i in range(test_length):
+        test_file.write(str(data_lines.pop()), + '\n')
+    test_file.close()    
+
 
 def splitDataRandom(data, trainData, testData, ratio):
     """
