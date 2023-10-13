@@ -34,7 +34,7 @@ def splitData(data, trainData, testData, ratio):
     data_label = data_file.readline()
     data_lines = []
     for line in data_file:
-        data_lines.add(line)
+        data_lines.append(line)
     data_file.close()
 
     train_length = len(data_lines) * ratio
